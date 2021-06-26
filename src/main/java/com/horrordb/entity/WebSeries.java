@@ -1,53 +1,27 @@
 package com.horrordb.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+//import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 @Entity
 @Table(name="webseries")
-public class WebSeries {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-
-    private String name;
-
-    @Size(min = 0, max = 1280)
-    @Column(length = 1280)
-    private String description;
+public class WebSeries extends WebElement {
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    private String link;
+    private int nbEpisodes;
 
     public WebSeries() {
     }
 
-    public WebSeries(String name, String desc, LocalDate startDate, LocalDate endDate, String link) {
-        this.name = name;
-        this.description = desc;
+    public WebSeries(String name, String desc, LocalDate startDate, LocalDate endDate, String link, int nbEpisodes) {
+        super(name, desc, link);
         this.startDate = startDate;
         this.endDate = endDate;
-        this.link = link;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDesc() {
-        return description;
-    }
-
-    public void setDesc(String desc) {
-        this.description = desc;
+        this.nbEpisodes = nbEpisodes;
     }
 
     public LocalDate getStartDate() {
@@ -66,11 +40,11 @@ public class WebSeries {
         this.endDate = endDate;
     }
 
-    public String getLink() {
-        return link;
+    public int getNbEpisodes() {
+        return nbEpisodes;
     }
 
-    public void setLink(String link) {
-        this.link = link;
+    public void setNbEpisodes(int num) {
+        this.nbEpisodes = num;
     }
 }

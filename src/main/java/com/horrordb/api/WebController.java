@@ -1,6 +1,7 @@
 package com.horrordb.api;
 
-import com.horrordb.entity.WebSeries;
+import com.horrordb.entity.WebElement;
+//import com.horrordb.entity.WebSeries;
 import com.horrordb.jpa.WebRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,61 +22,60 @@ public class WebController {
 
     //public WebController(WebRepository wsRepository){ this.webRepository = wsRepository; }
 
-    @GetMapping("/webseries")
-    public ResponseEntity<List<WebSeries>> getWebSeries(@RequestParam(required = false) String title) {
+    @GetMapping("/weblist")
+    public ResponseEntity<List<WebElement>> getWebSeries(@RequestParam(required = false) String title) {
         try {
-            List<WebSeries> ws = new ArrayList<>();
+            List<WebElement> wb = new ArrayList<>();
 
             if (title == null)
-                webRepository.findAll().forEach(ws::add);
+                webRepository.findAll().forEach(wb::add);
             else
-                webRepository.findByNameContaining(title).forEach(ws::add);
+                webRepository.findByNameContaining(title).forEach(wb::add);
 
-            if (ws.isEmpty()) {
+            if (wb.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
 
-            return new ResponseEntity<>(ws, HttpStatus.OK);
+            return new ResponseEntity<>(wb, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
-    @PostMapping("/webseries")
-    void addWebSeries(@RequestBody WebSeries webseries) {
-        webRepository.save(webseries);
+    @PostMapping("/weblist")
+    void addWebSeries(@RequestBody WebElement we) {
+        webRepository.save(we);
     }
 
-    @GetMapping("/webseries/{id}")
-    public ResponseEntity<WebSeries> getWebSeriesById(@PathVariable("id") long id) {
-        Optional<WebSeries> wsData = webRepository.findById(id);
+    @GetMapping("/weblist/{id}")
+    public ResponseEntity<WebElement> getWebSeriesById(@PathVariable("id") long id) {
+        Optional<WebElement> weData = webRepository.findById(id);
 
-        if (wsData.isPresent()) {
-            return new ResponseEntity<>(wsData.get(), HttpStatus.OK);
+        if (weData.isPresent()) {
+            return new ResponseEntity<>(weData.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @PutMapping("/webseries/{id}")
-    public ResponseEntity<WebSeries> updateTutorial(@PathVariable("id") long id, @RequestBody WebSeries ws) {
-        Optional<WebSeries> wsData = webRepository.findById(id);
+    @PutMapping("/weblist/{id}")
+    public ResponseEntity<WebElement> updateWebElement(@PathVariable("id") long id, @RequestBody WebElement we) {
+        Optional<WebElement> weData = webRepository.findById(id);
 
-        if (wsData.isPresent()) {
-            WebSeries _ws = wsData.get();
-            _ws.setName(ws.getName());
-            _ws.setDesc(ws.getDesc());
-            _ws.setStartDate(ws.getStartDate());
-            _ws.setEndDate(ws.getEndDate());
-            _ws.setLink(ws.getLink());
-            return new ResponseEntity<>(webRepository.save(_ws), HttpStatus.OK);
+        if (weData.isPresent()) {
+            WebElement _we = weData.get();
+            _we.setName(we.getName());
+            _we.setDesc(we.getDesc());
+            _we.setLink(we.getLink());
+            _we.setTags(we.getTags());
+            return new ResponseEntity<>(webRepository.save(_we), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/webseries/{id}")
-    public ResponseEntity<HttpStatus> deleteTutorial(@PathVariable("id") long id) {
+    @DeleteMapping("/weblist/{id}")
+    public ResponseEntity<HttpStatus> deleteWebElement(@PathVariable("id") long id) {
         try {
             webRepository.deleteById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
