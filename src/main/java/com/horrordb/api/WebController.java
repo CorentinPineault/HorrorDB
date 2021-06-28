@@ -107,7 +107,6 @@ public class WebController {
             _we.setName(we.getName());
             _we.setDesc(we.getDesc());
             _we.setLink(we.getLink());
-            _we.setTags(we.getTags());
             return new ResponseEntity<>(webRepository.save(_we), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
