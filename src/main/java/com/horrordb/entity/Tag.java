@@ -9,13 +9,13 @@ import java.util.List;
 public class Tag {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long tag_id;
 
     private String name;
 
     private String description;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "tags")
     private List<WebElement> webEntries;
 
     public Tag(){

@@ -10,7 +10,7 @@ import java.util.List;
 public class WebElement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private long web_id;
 
     private String name;
 
@@ -21,6 +21,7 @@ public class WebElement {
     private String link;
 
     @ManyToMany
+    @JoinTable(name="tag_webelements", joinColumns={@JoinColumn(name="web_id")}, inverseJoinColumns={@JoinColumn(name="tag_id")})
     private List<Tag> tags;
 
     public WebElement() {
