@@ -21,6 +21,10 @@ public class WebElement {
     private String link;
 
     @ManyToMany
+    @JoinTable(name="creators_webelements", joinColumns={@JoinColumn(name="web_id")}, inverseJoinColumns={@JoinColumn(name="person_id")})
+    private List<Person> creators;
+
+    @ManyToMany
     @JoinTable(name="tag_webelements", joinColumns={@JoinColumn(name="web_id")}, inverseJoinColumns={@JoinColumn(name="tag_id")})
     private List<Tag> tags;
 

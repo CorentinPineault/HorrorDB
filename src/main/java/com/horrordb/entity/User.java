@@ -1,5 +1,5 @@
 package com.horrordb.entity;
 
-public class Company {
+public class User {
     
 }

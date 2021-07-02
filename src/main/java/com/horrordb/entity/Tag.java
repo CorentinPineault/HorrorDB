@@ -18,6 +18,9 @@ public class Tag {
     @ManyToMany(mappedBy = "tags")
     private List<WebElement> webEntries;
 
+    @ManyToMany(mappedBy = "tags")
+    private List<VideoGame> videoGames;
+
     public Tag(){
 
     }

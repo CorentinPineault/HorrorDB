@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SeriesRepository extends JpaRepository<WebSeries, Long> {
+public interface WebSeriesRepository extends JpaRepository<WebSeries, Long> {
     List<WebSeries> findByNameContaining(String name);
 }

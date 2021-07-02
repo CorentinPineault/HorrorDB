@@ -7,6 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -16,9 +19,15 @@ public class VideoGame {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long game_id;
 
-    private String name;
+    private String title;
 
     private LocalDateTime releaseDate;
 
+    private List<Person> devs;
+
+    @ManyToMany
+    @JoinTable(name="tag_games", joinColumns={@JoinColumn(name="game_id")}, inverseJoinColumns={@JoinColumn(name="tag_id")})
     private List<Tag> tags;
+
+    
 }
