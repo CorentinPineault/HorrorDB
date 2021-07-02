@@ -12,7 +12,7 @@
     <artifactId>HorrorDB</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>HorrorDB</name>
-    <description>Demo project for Spring Boot</description>
+    <description></description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -67,6 +67,11 @@
             <groupId>org.springframework.restdocs</groupId>
             <artifactId>spring-restdocs-mockmvc</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.jmapper-framework</groupId>
+            <artifactId>jmapper-core</artifactId>
+            <version>1.6.1.CR2</version>
         </dependency>
 
     </dependencies>
